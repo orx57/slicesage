@@ -69,76 +69,119 @@ elif menu == "Calculateur Avancé":
         help="Entrez la quantité de filament utilisé en grammes."
     )
 
+    # Initialisation des valeurs par défaut dans le session state
+    if 'cout_filament_kg' not in st.session_state:
+        st.session_state['cout_filament_kg'] = 26.21
+
+    if 'marge_filament' not in st.session_state:
+        st.session_state['marge_filament'] = 5.0
+
+    if 'consommation_electrique' not in st.session_state:
+        st.session_state['consommation_electrique'] = 120
+
+    if 'cout_kwh' not in st.session_state:
+        st.session_state['cout_kwh'] = 0.27
+
+    if 'cout_main_oeuvre_h' not in st.session_state:
+        st.session_state['cout_main_oeuvre_h'] = 11.88
+
+    if 'temps_pretraitement' not in st.session_state:
+        st.session_state['temps_pretraitement'] = 5
+
+    if 'temps_posttraitement' not in st.session_state:
+        st.session_state['temps_posttraitement'] = 1
+
+    if 'cout_machine' not in st.session_state:
+        st.session_state['cout_machine'] = 452.77
+
+    if 'duree_amortissement' not in st.session_state:
+        st.session_state['duree_amortissement'] = 3
+
+    if 'utilisation_journaliere' not in st.session_state:
+        st.session_state['utilisation_journaliere'] = 2
+
+    if 'cout_maintenance' not in st.session_state:
+        st.session_state['cout_maintenance'] = 5
+
+    if 'autres_couts' not in st.session_state:
+        st.session_state['autres_couts'] = 0
+
+    if 'marge_beneficiaire' not in st.session_state:
+        st.session_state['marge_beneficiaire'] = 40.0
+
+    if 'tva' not in st.session_state:
+        st.session_state['tva'] = 20.0
+
     # Paramètres ajustables avec des descriptions
     st.sidebar.header("Paramètres Ajustables")
-    cout_filament_kg = st.sidebar.number_input(
+    st.session_state['cout_filament_kg'] = st.sidebar.number_input(
         "Coût du filament par kg (€)",
-        value=26.21,
+        value=st.session_state['cout_filament_kg'],
         help="Entrez le coût du filament par kilogramme."
     )
-    marge_filament = st.sidebar.number_input(
+    st.session_state['marge_filament'] = st.sidebar.number_input(
         "Marge du filament (%)",
-        value=5.0,
+        value=st.session_state['marge_filament'],
         help="Entrez la marge appliquée au coût du filament."
     )
-    consommation_electrique = st.sidebar.number_input(
+    st.session_state['consommation_electrique'] = st.sidebar.number_input(
         "Consommation électrique (watts)",
-        value=120,
+        value=st.session_state['consommation_electrique'],
         help="Entrez la consommation électrique de l'imprimante en watts."
     )
-    cout_kwh = st.sidebar.number_input(
+    st.session_state['cout_kwh'] = st.sidebar.number_input(
         "Coût par kWh (€)",
-        value=0.27,
+        value=st.session_state['cout_kwh'],
         help="Entrez le coût de l'électricité par kilowattheure."
     )
-    cout_main_oeuvre_h = st.sidebar.number_input(
+    st.session_state['cout_main_oeuvre_h'] = st.sidebar.number_input(
         "Coût horaire de la main-d'œuvre (€)",
-        value=11.88,
+        value=st.session_state['cout_main_oeuvre_h'],
         help="Entrez le coût horaire de la main-d'œuvre."
     )
-    temps_pretraitement = st.sidebar.number_input(
+    st.session_state['temps_pretraitement'] = st.sidebar.number_input(
         "Temps de prétraitement (minutes)",
-        value=5,
+        value=st.session_state['temps_pretraitement'],
         help="Entrez le temps de prétraitement en minutes."
     )
-    temps_posttraitement = st.sidebar.number_input(
+    st.session_state['temps_posttraitement'] = st.sidebar.number_input(
         "Temps de post-traitement (minutes)",
-        value=5,
+        value=st.session_state['temps_posttraitement'],
         help="Entrez le temps de post-traitement en minutes."
     )
-    cout_machine = st.sidebar.number_input(
+    st.session_state['cout_machine'] = st.sidebar.number_input(
         "Coût de la machine (€)",
-        value=452.77,
+        value=st.session_state['cout_machine'],
         help="Entrez le coût total de la machine."
     )
-    duree_amortissement = st.sidebar.number_input(
+    st.session_state['duree_amortissement'] = st.sidebar.number_input(
         "Durée d'amortissement (années)",
-        value=3,
+        value=st.session_state['duree_amortissement'],
         help="Entrez la durée d'amortissement de la machine en années."
     )
-    utilisation_journaliere = st.sidebar.number_input(
+    st.session_state['utilisation_journaliere'] = st.sidebar.number_input(
         "Utilisation quotidienne de la machine (heures)",
-        value=2,
+        value=st.session_state['utilisation_journaliere'],
         help="Entrez le nombre d'heures d'utilisation quotidienne de la machine."
     )
-    cout_maintenance = st.sidebar.number_input(
+    st.session_state['cout_maintenance'] = st.sidebar.number_input(
         "Coût de maintenance (%)",
-        value=5,
+        value=st.session_state['cout_maintenance'],
         help="Entrez le pourcentage de coût de maintenance annuel."
     )
-    autres_couts = st.sidebar.number_input(
+    st.session_state['autres_couts'] = st.sidebar.number_input(
         "Autres coûts (€)",
-        value=0,
+        value=st.session_state['autres_couts'],
         help="Entrez tout autre coût supplémentaire."
     )
-    marge_beneficiaire = st.sidebar.number_input(
+    st.session_state['marge_beneficiaire'] = st.sidebar.number_input(
         "Marge bénéficiaire (%)",
-        value=40.0,
+        value=st.session_state['marge_beneficiaire'],
         help="Entrez la marge bénéficiaire souhaitée."
     )
-    tva = st.sidebar.number_input(
+    st.session_state['tva'] = st.sidebar.number_input(
         "TVA (%)",
-        value=20.0,
+        value=st.session_state['tva'],
         help="Entrez le taux de TVA applicable."
     )
 
@@ -146,29 +189,29 @@ elif menu == "Calculateur Avancé":
     if st.button("Calculer"):
         # Convertir le temps en heures
         minutes_machine = temps_impression
-        temps_main_oeuvre = temps_pretraitement + temps_posttraitement
+        temps_main_oeuvre = st.session_state['temps_pretraitement'] + st.session_state['temps_posttraitement']
         
         # Coût de la machine
-        cout_machine_reel = cout_machine + cout_machine / 100 * cout_maintenance
-        couts_machine = cout_machine_reel / duree_amortissement / 365 / utilisation_journaliere / 60 * minutes_machine
+        cout_machine_reel = st.session_state['cout_machine'] + st.session_state['cout_machine'] / 100 * st.session_state['cout_maintenance']
+        couts_machine = cout_machine_reel / st.session_state['duree_amortissement'] / 365 / st.session_state['utilisation_journaliere'] / 60 * minutes_machine
         
         # Coût de l'énergie
-        couts_energie = minutes_machine * consommation_electrique * cout_kwh / 60 / 1000
+        couts_energie = minutes_machine * st.session_state['consommation_electrique'] * st.session_state['cout_kwh'] / 60 / 1000
         
         # Coût du filament
-        filament_utilise_total = ceil(filament_utilise + filament_utilise / 100 * marge_filament)
-        couts_filament = filament_utilise_total * cout_filament_kg / 1000
+        filament_utilise_total = ceil(filament_utilise + filament_utilise / 100 * st.session_state['marge_filament'])
+        couts_filament = filament_utilise_total * st.session_state['cout_filament_kg'] / 1000
         
         # Coût de la main-d'œuvre
-        couts_main_oeuvre = temps_main_oeuvre / 60 * cout_main_oeuvre_h
+        couts_main_oeuvre = temps_main_oeuvre / 60 * st.session_state['cout_main_oeuvre_h']
         
         # Somme de tous les coûts
-        tous_les_couts = couts_main_oeuvre + couts_filament + couts_energie + couts_machine + autres_couts
+        tous_les_couts = couts_main_oeuvre + couts_filament + couts_energie + couts_machine + st.session_state['autres_couts']
         
         # Marge et taxes
-        marge = tous_les_couts / 100 * marge_beneficiaire
+        marge = tous_les_couts / 100 * st.session_state['marge_beneficiaire']
         net = tous_les_couts + marge
-        taxe = net / 100 * tva
+        taxe = net / 100 * st.session_state['tva']
         cout_total = net + taxe
 
         # Affichage des coûts
@@ -184,13 +227,13 @@ elif menu == "Calculateur Avancé":
             ],
             "Montant (€)": [
                 f"{couts_main_oeuvre:.2f}", f"{couts_machine:.2f}", f"{couts_filament:.2f}", 
-                f"{couts_energie:.2f}", f"{autres_couts:.2f}", f"{tous_les_couts:.2f}", 
+                f"{couts_energie:.2f}", f"{st.session_state['autres_couts']:.2f}", f"{tous_les_couts:.2f}", 
                 f"{marge:.2f}", f"{net:.2f}", f"{taxe:.2f}", f"{cout_total:.2f}"
             ],
             "Pourcentage (%)": [
                 int((couts_main_oeuvre / cout_total) * 100), int((couts_machine / cout_total) * 100), 
                 int((couts_filament / cout_total) * 100), int((couts_energie / cout_total) * 100), 
-                int((autres_couts / cout_total) * 100), int((tous_les_couts / cout_total) * 100), 
+                int((st.session_state['autres_couts'] / cout_total) * 100), int((tous_les_couts / cout_total) * 100), 
                 int((marge / cout_total) * 100), int((net / cout_total) * 100), 
                 int((taxe / cout_total) * 100), 100
             ]
